@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEBP to PNG</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      width: 250px;
+      margin: 0;
+      background: #fff;
+    }
+    #pasteArea {
+      border: 2px dashed #4CAF50;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      color: #777;
+      height: 150px;
+      margin-bottom: 20px;
+      line-height: 120px;
+      cursor: pointer;
+    }
+    #pasteArea.hover {
+      background: #f0f0f0;
+    }
+    #downloadButton {
+      background: #4CAF50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+      width: 100%;
+      border: none;
+      font-size: 14px;
+    }
+    #downloadButton:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <h3>Paste the image here (Ctrl+V)</h3>
+  <div id="pasteArea" contenteditable="true"></div>
+  <button id="downloadButton" disabled>Convert and Download PNG</button>
+  <script src="popup.js"></script>
+</body>
+</html>
