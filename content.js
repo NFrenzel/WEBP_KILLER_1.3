@@ -1,43 +1,49 @@
- function convertWebPToPNG(imgElement) {
+function convertWebPToPNG(imgElement) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
 
-    //Set canvas dimensions to match each image
+    // Full resolution for export
     canvas.width = imgElement.naturalWidth;
     canvas.height = imgElement.naturalHeight;
 
-    //Draw the image onto the canvas
     ctx.drawImage(imgElement, 0, 0);
 
-    //Button that says "Convert to PNG"
+    // Ensure Preview Fits Inside Extenson
+    canvas.style.maxWidth = "100%";
+    canvas.style.height = "auto";
+    canvas.style.display = "block";
+
+    // Convert to PNG
+    const pngDataURL = canvas.toDataURL("image/png");
+
+    // Button
     const btn = document.createElement("button");
-    btn.textContentv = "Convert to PNG";
-    btn.style.merginTop = "10px";
+    btn.textContent = "Convert to PNG";
+    btn.style.marginTop = "10px";
     btn.style.backgroundColor = "#4CAF50";
     btn.style.color = "white";
-    btn.style.color = "none";
     btn.style.padding = "5px 10px";
     btn.style.cursor = "pointer";
 
-    //Add an event listener to download the image as PNG when clicked
     btn.addEventListener("click", () => {
         const a = document.createElement("a");
         a.href = pngDataURL;
         a.download = "converted.png";
-        acclick();
+        a.click();
     });
 
-    //Append the button after the image
-    imgElement.parentElement.insterBefore(btn, imgElement.nextSibling);
- }
+    // Insert canvas + button
+    imgElement.parentElement.insertBefore(canvas, imgElement.nextSibling);
+    imgElement.parentElement.insertBefore(btn, canvas.nextSibling);
+}
 
- //Iterate over all images and convert the ones with '.webp'
- document.querySelectorAll("img".forEach(img =>{
+// Find WebP images
+document.querySelectorAll("img").forEach(img => {
     if (img.src.endsWith(".webp") || img.currentSrc.includes("webp")) {
         const tempImg = new Image();
-        tempImg.crossOrigin = "Anonymous"; // Ensure CORS support
+        tempImg.crossOrigin = "Anonymous";
         tempImg.src = img.src;
 
-        tempImg.onload = () => convertWebPToPNG(img);
+        tempImg.onload = () => convertWebPToPNG(tempImg);
     }
- }))
+});
