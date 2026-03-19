@@ -12,20 +12,45 @@
       margin: 0;
       background: #fff;
     }
+
     #pasteArea {
       border: 2px dashed #4CAF50;
       border-radius: 5px;
-      padding: 20px;
+      padding: 12px;
       text-align: center;
       color: #777;
-      height: 150px;
+      min-height: 150px;
       margin-bottom: 20px;
-      line-height: 120px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
     }
+
     #pasteArea.hover {
       background: #f0f0f0;
     }
+
+    #pasteMessage {
+      pointer-events: none;
+    }
+
+    #previewContainer {
+      width: 100%;
+      max-height: 220px;
+      overflow: auto;
+    }
+
+    #previewContainer canvas,
+    #previewContainer img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
     #downloadButton {
       background: #4CAF50;
       color: white;
@@ -37,6 +62,12 @@
       border: none;
       font-size: 14px;
     }
+
+    #downloadButton:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     #downloadButton:focus {
       outline: none;
     }
@@ -44,7 +75,12 @@
 </head>
 <body>
   <h3>Paste the image here (Ctrl+V)</h3>
-  <div id="pasteArea" contenteditable="true"></div>
+
+  <div id="pasteArea" tabindex="0">
+    <div id="pasteMessage">Click here and press Ctrl+V</div>
+    <div id="previewContainer"></div>
+  </div>
+
   <button id="downloadButton" disabled>Convert and Download PNG</button>
   <script src="popup.js"></script>
 </body>
